@@ -1,0 +1,109 @@
+:root {
+  /* EDIT HERE to tweak palette. */
+  --bg-start: #FFD8C2; /* peach */
+  --bg-end:   #F9B4C7; /* blush */
+  --text-color: #4A2C2A; /* warm deep brown */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--text-color);
+  font-family: "Quicksand", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.4;
+  background: linear-gradient(160deg, var(--bg-start), var(--bg-end));
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  width: min(92vw, 900px);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 2vh 0;
+}
+
+/* The tappable/keyboard-activable sentence area */
+#quoteButton {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  padding: clamp(0.9rem, 2.5vh, 1.25rem) clamp(1.1rem, 3vw, 1.75rem);
+  cursor: pointer;
+  color: inherit;
+  width: min(90vw, 38ch);
+  min-height: 56px; /* large tap target */
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  background-clip: padding-box;
+}
+
+#quoteButton:hover {
+  background: rgba(255, 255, 255, 0.33);
+}
+
+#quoteButton:focus-visible {
+  outline: 3px solid rgba(74, 44, 42, 0.6);
+  outline-offset: 4px;
+}
+
+#quote {
+  font-weight: 600;
+  font-size: clamp(1.25rem, 4.5vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: 0.2px;
+  max-width: 32ch;
+  transition: opacity 240ms ease, transform 240ms ease;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+  display: grid;
+  gap: 0.35rem;
+  max-width: 38ch;
+}
+
+/* Fade/scale state toggled during transitions */
+#quote.hide {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* Language-specific tweaks */
+#quote .en {
+  font-family: "Quicksand", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.2px;
+}
+
+#quote .zh {
+  font-family: "Noto Sans SC", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0; /* better for CJK */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #quote {
+    transition: none;
+  }
+}
