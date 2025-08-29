@@ -50,7 +50,7 @@ main {
   padding: clamp(0.9rem, 2.5vh, 1.25rem) clamp(1.1rem, 3vw, 1.75rem);
   cursor: pointer;
   color: inherit;
-  width: min(90vw, 38ch);
+  width: min(90vw, 65ch);
   min-height: 56px; /* large tap target */
   display: grid;
   place-items: center;
@@ -73,16 +73,27 @@ main {
 #quote {
   font-weight: 600;
   font-size: clamp(1.25rem, 4.5vw, 2.5rem);
-  line-height: 1.2;
+  line-height: 1.5;
   letter-spacing: 0.2px;
-  max-width: 32ch;
   transition: opacity 240ms ease, transform 240ms ease;
   text-shadow:
     0 1px 0 rgba(255, 255, 255, 0.25),
     0 2px 8px rgba(0, 0, 0, 0.06);
-  display: grid;
-  gap: 0.35rem;
-  max-width: 38ch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  /* Added this to prevent text from overflowing the container */
+  overflow-wrap: break-word;
+}
+
+.divider {
+  width: 60%;
+  height: 2px;
+  background: rgba(74, 44, 42, 0.3);
+  margin: 0.1rem 0;
+  border-radius: 1px;
 }
 
 /* Fade/scale state toggled during transitions */
@@ -92,6 +103,11 @@ main {
 }
 
 /* Language-specific tweaks */
+#quote .en,
+#quote .zh {
+  display: block;
+}
+
 #quote .en {
   font-family: "Quicksand", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   letter-spacing: 0.2px;
@@ -100,6 +116,7 @@ main {
 #quote .zh {
   font-family: "Noto Sans SC", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   letter-spacing: 0; /* better for CJK */
+  /* Removed word-break: keep-all; which caused the overflow */
 }
 
 @media (prefers-reduced-motion: reduce) {
